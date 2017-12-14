@@ -65,14 +65,15 @@ func main() {
 		} else {
 			log.Println(err)
 		}
+		// err = errors.New("Oh")
 		if dingRobotToken != "" {
 			cmdline := strings.Join(args, " ")
 			dingrobot.New(dingRobotToken).Markdown("cmd quit: "+cmdline,
-				fmt.Sprintf(">%s\n\n", cmdline)+
-					fmt.Sprintf("**%v**\n", err)+
-					fmt.Sprintf("- 运行时间: %s\n", time.Since(startTime))+
+				fmt.Sprintf("**$** %s\n\n", cmdline)+
+					fmt.Sprintf(">%v\n\n", err)+
 					fmt.Sprintf("- IP: %s\n", currentIP())+
-					fmt.Sprintf("- OS: %s\n", runtime.GOOS))
+					fmt.Sprintf("- OS: %s\n", runtime.GOOS)+
+					fmt.Sprintf("- 时长: %s\n", time.Since(startTime)))
 		}
 	case <-sigC:
 		log.Println("Handle interrupt signal, kill program")
